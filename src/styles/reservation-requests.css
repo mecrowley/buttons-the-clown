@@ -1,0 +1,21 @@
+.reservations-display {
+    display: flex;
+    flex-direction: column;
+}
+
+.reservations__header {
+    display: flex;
+}
+
+.reservations__title {
+    flex: 3;
+}
+
+.reservations__performer {
+    flex: 2;
+}
+
+.reservation {
+    display: flex;
+    justify-content: space-between;
+}

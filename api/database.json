@@ -1,14 +1,31 @@
 {
-    "clowns": [
-        {
-            "id": 1,
-            "name": "Buttons"
-        },
-        {
-            "id": 2,
-            "name": "Lollipop"
-        }
-    ],
-    "requests": [],
-    "completions":[]
+  "clowns": [
+    {
+      "id": 1,
+      "name": "Buttons"
+    },
+    {
+      "id": 2,
+      "name": "Lollipop"
+    }
+  ],
+  "reservations": [
+    {
+      "guardianName": "Madeline",
+      "childName": "Pierce",
+      "childrenNumber": "4",
+      "partyAddress": "55 Audubon Dr",
+      "reservationLength": "2",
+      "reservationDate": "2021-05-19",
+      "id": 1
+    }
+  ],
+  "completions": [
+    {
+      "reservationId": 1,
+      "clownId": 2,
+      "date_created": "5/17/2021",
+      "id": 1
+    }
+  ]
 }
