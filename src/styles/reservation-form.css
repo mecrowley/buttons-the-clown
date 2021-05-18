@@ -9,6 +9,29 @@
     margin: 1rem 0 2rem 0;
     padding: 0.5rem;
     color: white;
-    background-color: #048A81;
+    background-color: #f758e1;
     font-size: 1rem;
+}
+
+.reservation-form {
+    display: flex;
+}
+
+.form__fields {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    background-color: rgba(255, 255, 255, 0.719);
+    padding: 1rem;
+}
+
+.clowncore {
+    display: block;
+    border: solid #fa9167 1rem;
+    margin: 2rem auto;
+    width: 90%;
+}
+
+.now-offering {
+    opacity: 100%;
 }

@@ -24,7 +24,9 @@ mainContainer.addEventListener("click", clickEvent => {
 
 export const ReservationForm = () => {
     let html = `
-        <div class="field">
+    <div class="form__fields">
+    <h2 class="now-offering">Now offering online reservations!</h2>    
+    <div class="field">
             <label class="label" for="guardianName">Guardian Name</label>
             <input type="text" name="guardianName" class="input" />
         </div>
@@ -50,6 +52,7 @@ export const ReservationForm = () => {
         </div>
 
         <button class="button" id="submitRequest">Submit Request</button>
+        </div>
     `
 
     return html

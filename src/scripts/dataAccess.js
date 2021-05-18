@@ -15,6 +15,10 @@ export const getClowns = () => {
     return [...applicationState.clowns]
 }
 
+export const getCompletions = () => {
+    return [...applicationState.completions]
+}
+
 export const fetchReservations = () => {
     return fetch(`${API}/reservations`)
         .then(response => response.json())
@@ -39,12 +43,12 @@ export const fetchClowns = () => {
 
 export const fetchCompletions = () => {
     return fetch(`${API}/completions`)
-    .then(response => response.json())
-    .then(
-        (completions) => {
-            applicationState.completions = completions
-        }
-    )
+        .then(response => response.json())
+        .then(
+            (completions) => {
+                applicationState.completions = completions
+            }
+        )
 }
 
 export const sendReservation = (reservation) => {
@@ -64,15 +68,6 @@ export const sendReservation = (reservation) => {
         )
 }
 
-export const deleteReservation = (id) => {
-    return fetch(`${API}/reservations/${id}`, { method: "DELETE" })
-        .then(
-            () => {
-                mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
-            }
-        )
-}
-
 export const saveCompletion = (completion) => {
     const fetchOptions = {
         method: "POST",
@@ -83,6 +78,15 @@ export const saveCompletion = (completion) => {
     }
     return fetch(`${API}/completions`, fetchOptions)
         .then(response => response.json())
+        .then(
+            () => {
+                mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+            }
+        )
+}
+
+export const deleteReservation = (id) => {
+    return fetch(`${API}/reservations/${id}`, { method: "DELETE" })
         .then(
             () => {
                 mainContainer.dispatchEvent(new CustomEvent("stateChanged"))

@@ -1,8 +1,27 @@
-import { deleteReservation, getClowns, getReservations, saveCompletion } from "./dataAccess.js"
+import { deleteReservation, getClowns, getCompletions, getReservations, saveCompletion } from "./dataAccess.js"
 const mainContainer = document.querySelector("#container")
 
 export const Reservations = () => {
     const reservations = getReservations()
+    const completions = getCompletions()
+
+    let reservationsCompleted = reservations.map(reservation => {
+        if (completions.length === 0) {
+            reservation.completed = false
+        } else {
+            for (const completion of completions) {
+                if (completion.reservationId === reservation.id) {
+                    reservation.completed = true
+                    return reservation
+                }
+                reservation.completed = false
+            }
+        }
+        return reservation
+    })
+
+    reservationsCompleted.sort((a, b) => a.completed - b.completed)
+
     let html = `
     <section class="reservations-display">
     <div class="reservations__header">
@@ -10,7 +29,7 @@ export const Reservations = () => {
     <div class="reservations__performer">Performed by:</div> 
     </div>
     <div class="reservations">
-    ${reservations.map(convertResToDivElement).join("")
+    ${reservationsCompleted.map(convertResToDivElement).join("")
         }
     </div>
     </section>`
@@ -19,24 +38,44 @@ export const Reservations = () => {
 
 const convertResToDivElement = (reservation) => {
     const clowns = getClowns()
-    return `
-    <div class="reservation">
-    <div class="reservation__childName">${reservation.childName}</div>
-    <div class="reservation__performer">
-    <select class="clowns" id="clowns">
-    <option value="0">Choose</option>
-    ${clowns.map(
-        clown => {
-            return `<option value="${reservation.id}--${clown.id}">${clown.name}</option>`
-        }
-    ).join("")
-        }
+    const completions = getCompletions()
+    if (reservation.completed === false) {
+        return `
+        <div class="reservation incomplete">
+        <div class="reservation__childName">${reservation.childName}</div>
+        <div class="reservation__mods">
+        <div class="reservation__performer">
+        <select class="clowns" id="clowns">
+        <option value="0">Choose</option>
+        ${clowns.map(
+            clown => {
+                return `<option value="${reservation.id}--${clown.id}">${clown.name}</option>`
+            }
+        ).join("")
+            }
         </select>
-    </div>
-    <div class="reservation__deny">
-    <button class="delete-button"id="reservation--${reservation.id}">Deny</button>
-    </div>
-    </div>`
+        </div>
+        <div class="reservation__deny">
+        <button class="delete-button"id="reservation--${reservation.id}">Deny</button>
+        </div>
+        </div>
+        </div>`
+    } else {
+        const foundCompletion = completions.find(completion => completion.reservationId === reservation.id)
+        const foundClown = clowns.find(clown => clown.id === foundCompletion.clownId)
+        return `
+        <div class="reservation complete">
+        <div class="reservation__childName">${reservation.childName}</div>
+        <div class="reservation__mods">
+        <div class="reservation__performer">
+        ${foundClown.name}
+        </div>
+        <div class="reservation__deny">
+        <button class="delete-button"id="reservation--${reservation.id}">Delete</button>
+        </div>
+        </div>
+        </div>`
+    }
 }
 
 document.addEventListener("change", changeEvent => {

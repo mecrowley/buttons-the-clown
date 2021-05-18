@@ -1,10 +1,25 @@
 .reservations-display {
     display: flex;
     flex-direction: column;
+    background-color: rgba(245, 245, 245, 0.8);
+    border: solid #9b9b9b 2px;
+    font-family: 'Roboto', Sans-Serif;
+	font-size: 1rem;
+	line-height: 1.5;
+}
+
+.res__header {
+    background-color: #fa9167f8;
+    padding: 0.75rem;
 }
 
 .reservations__header {
     display: flex;
+    background-color: #f758e1;
+    font-family: 'Permanent Marker', cursive;
+    color: #404040;
+    justify-content: space-evenly;
+    padding: 0.75rem 1.5rem;
 }
 
 .reservations__title {
@@ -12,10 +27,31 @@
 }
 
 .reservations__performer {
-    flex: 2;
+    flex: 1;
 }
 
 .reservation {
     display: flex;
+    justify-content: space-evenly;
+    border-top: solid #9b9b9b 2px;
+    padding: 0.5rem 1.5rem;
+}
+
+.reservation__childName {
+    flex: 3;
+}
+
+.reservation__mods {
+    display: flex;
     justify-content: space-between;
+    flex: 1;
+}
+
+.delete-button {
+    color: white;
+    background-color: #f758e1;
+}
+
+.complete {
+    background-color: #9b9b9b;
 }
